@@ -9,13 +9,13 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "app_user")
 @Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;

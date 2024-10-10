@@ -1,6 +1,7 @@
 package com.example.leo.service;
 
 import com.example.leo.entity.User;
+import com.example.leo.exception.LoginException;
 import com.example.leo.exception.UserAlreadyExistException;
 import com.example.leo.mapper.UserMapper;
 import com.example.leo.model.UserRegistrationDto;
@@ -38,11 +39,49 @@ public class UserService {
         }
         User user = userMapper.toEntity(userRegistrationDTO);
         try {
+            //user.setPassword(passwordEncoder.encode(user.getPassword()));
             user = userRepository.save(user);
         }catch (Exception e) {
             throw new RuntimeException("An unexpected error occured while saving the user ", e);
         }
         return user.getId();
+    }
+
+    /**
+     * * authenticate the loging user
+     * *
+     * @param email, password logging user details
+     * @throws IllegalArgumentException if any validation rule is violated
+     */
+    public UserRegistrationDto authenticateUser(String email, String password) {
+        validateLoginUserDetails(email, password);
+
+        Optional<User> existingUser = userRepository.findByEmail(email);
+        if(existingUser.isEmpty()) {
+            throw new LoginException("Invalid email or password");
+        }
+        if(existingUser.get().getPassword().equals(password)) {
+            User user = existingUser.get();
+            return userMapper.toDTO(user);
+        }else {
+            throw new LoginException("Invalid email or password");
+        }
+    }
+
+    /**
+     * * validates the logging user details
+     * *
+     * @param email, password  the logging user details
+     * @throws IllegalArgumentException if any validation rule is violated
+     */
+    private void validateLoginUserDetails(String email, String password) {
+        if(email == null || email.trim().isEmpty() || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+
+        if(password== null || password.trim().isEmpty() || password.length() < 6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters long");
+        }
     }
 
     /**
@@ -60,6 +99,5 @@ public class UserService {
         if(userRegistrationDTO.getPassword() == null || userRegistrationDTO.getPassword().length() < 6) {
             throw new IllegalArgumentException("Password must be at least 6 characters long");
         }
-
     }
 }
