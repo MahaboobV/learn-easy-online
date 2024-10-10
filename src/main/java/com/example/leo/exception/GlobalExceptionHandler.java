@@ -52,6 +52,33 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
+    // Handle LoginException
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<ApiErrorResponse> handleLoginException(LoginException exception, HttpServletRequest request) {
+        ApiErrorResponse errorResponse = new ApiErrorResponse();
+        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        errorResponse.setError("Invalid Login!");
+        errorResponse.setMessage(Collections.singletonList(exception.getMessage()));
+        errorResponse.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    // Handle CourseException
+    @ExceptionHandler(CourseException.class)
+    public ResponseEntity<ApiErrorResponse> handleCourseException(CourseException exception, HttpServletRequest request) {
+        ApiErrorResponse errorResponse = new ApiErrorResponse();
+        errorResponse.setTimestamp(LocalDateTime.now());
+        errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        errorResponse.setError("Course Exception");
+        errorResponse.setMessage(Collections.singletonList(exception.getMessage()));
+        errorResponse.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+
     // Handle RuntimeException
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiErrorResponse> handleRuntimeException(RuntimeException exception, HttpServletRequest request) {
