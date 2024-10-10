@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container Styling */
+.container {
+    background-color: #fff; /* White background for the form */
+    width: 80%;
+    max-width: 600px; /* Limit max width for better readability */
+    margin: 50px auto; /* Center the container */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-radius: 8px; /* Rounded corners */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Align children vertically */
+    align-items: center; /* Center align children horizontally */
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+}
+
+/* Form Styling */
+.registration-form .form-group,
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.registration-form label,
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.error {
+    margin-top: 5px;
+    color: #e74c3c;
+    font-size: 0.9em;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+/* Login Link */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.login-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+    /* Adjust table styling for small screens */
+    table {
+        font-size: 14px; /* Decrease font size for smaller screens */
+    }
+}
+
+/* Table Styling */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Add some space between the heading and table */
+}
+
+.course-table th, .course-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.course-table th {
+    background-color: #4CAF50; /* Green header */
+    color: white;
+}
+
+.course-table tr:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+.course-table td {
+    vertical-align: top;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* Adjust table styling for small screens */
+    .course-table {
+        font-size: 14px; /* Decrease font size for smaller screens */
+    }
+
+    .course-table th, .course-table td {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
